@@ -1,7 +1,7 @@
 import { PROJECTS } from "../constants";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import logo from "../assets/1.png";
+import logo from "../assets/1.1.png";
 
 const Projects = () => {
   return (
@@ -91,7 +91,7 @@ const ImageOverlay = ({ isHovered }) => {
       <img
         src={logo} // Вказує на відносний шлях з поточної директорії
         alt="Logo"
-        className="h-70 w-60 object-contain"
+        className="h-20 w-20 object-contain"
       />
     </motion.div>
   );
