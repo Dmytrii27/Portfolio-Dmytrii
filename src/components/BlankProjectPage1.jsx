@@ -1,33 +1,58 @@
 // src/components/BlankProjectPage1.js
-import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const BlankProjectPage1 = () => {
-  const location = useLocation();
+  const navigate = useNavigate();
 
-  // Save the scroll position in session storage when the component mounts
-  useEffect(() => {
-    sessionStorage.setItem('scrollPosition', window.scrollY);
-  }, []);
+  const handleBackClick = () => {
+    const scrollPosition = sessionStorage.getItem("scrollPosition");
+    navigate("/");
+    setTimeout(() => {
+      window.scrollTo(0, scrollPosition || 0);
+    }, 0);
+  };
 
   return (
-    <div style={{ padding: '0px', textAlign: 'center', position: 'relative' }}>
+    <motion.div
+      style={{ padding: '0px', textAlign: 'center', position: 'relative' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{
+        duration: 1.2, // Smooth and slower duration for appearance
+        ease: "easeInOut"
+      }}
+    >
       {/* Back arrow to return to the main project page */}
-      <Link to="/" style={{ position: 'absolute', top: '-20px', left: '5px', textDecoration: 'none' }}>
+      <button
+        onClick={handleBackClick}
+        style={{
+          position: 'absolute',
+          top: '-20px',
+          left: '0',
+          textDecoration: 'none',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+        }}
+      >
         <div
           className="flex items-center text-stone-300 hover:text-stone-500 transition duration-200"
           style={{ transform: 'translateX(-150%)' }}
         >
           <span className="text-5xl">&#8592;</span>
-          <span className="ml-2 mt-1 text-xl">Back</span>
+          <span className="ml-2 mt-1 text-xl"></span>
         </div>
-      </Link>
+      </button>
 
       {/* Page content */}
       <h1 className="text-4xl mt-12">This is a placeholder for Project 1</h1>
       <p className="mt-4 text-stone-400">Details for Project 1 will be added here soon.</p>
-    </div>
+    </motion.div>
   );
 };
 
 export default BlankProjectPage1;
+

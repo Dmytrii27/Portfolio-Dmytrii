@@ -1,12 +1,12 @@
 // src/components/BlankProjectPage.js
-import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const BlankProjectPage = () => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    // Відновлення позиції скролу після повернення на головну
     const scrollPosition = sessionStorage.getItem("scrollPosition");
     navigate("/");
     setTimeout(() => {
@@ -15,21 +15,44 @@ const BlankProjectPage = () => {
   };
 
   return (
-    <div style={{ padding: '0px', textAlign: 'center', position: 'relative' }}>
-      {/* Стрілка повернення на головну сторінку */}
-      <button onClick={handleBackClick} style={{ position: 'absolute', top: '-20px', left: '0', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer' }}>
-        <div className="flex items-center text-stone-300 hover:text-stone-500 transition duration-200"
-             style={{ transform: 'translateX(-150%)' }}>
-          <span className="text-5xl">&#8592;</span> {/* Збільшення розміру стрілки */}
+    <motion.div
+      style={{ padding: '0px', textAlign: 'center', position: 'relative' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{
+        duration: 1.2, // Smooth and slower duration for appearance
+        ease: "easeInOut"
+      }}
+    >
+      {/* Back arrow to return to the main project page */}
+      <button
+        onClick={handleBackClick}
+        style={{
+          position: 'absolute',
+          top: '-20px',
+          left: '0',
+          textDecoration: 'none',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+        }}
+      >
+        <div
+          className="flex items-center text-stone-300 hover:text-stone-500 transition duration-200"
+          style={{ transform: 'translateX(-150%)' }}
+        >
+          <span className="text-5xl">&#8592;</span>
           <span className="ml-2 mt-1 text-xl"></span>
         </div>
       </button>
 
-      {/* Контент сторінки */}
+      {/* Page content */}
       <h1 className="text-4xl mt-12">This is a placeholder for Project 3</h1>
       <p className="mt-4 text-stone-400">Details for Project 3 will be added here soon.</p>
-    </div>
+    </motion.div>
   );
 };
 
 export default BlankProjectPage;
+

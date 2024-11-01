@@ -1,5 +1,5 @@
 import { RiReactjsLine } from "react-icons/ri";
-import { SiMongodb, SiHtml5, SiCss3, SiAdobe, SiExpress, SiAdobephotoshop } from "react-icons/si";
+import { SiMongodb, SiHtml5, SiCss3, SiAdobe, SiExpress, SiAdobephotoshop, SiJavascript } from "react-icons/si"; // Import JavaScript icon
 import { FaFigma, FaNodeJs, FaSketch } from "react-icons/fa";
 import { motion } from "framer-motion";
 
@@ -31,14 +31,14 @@ const Technologies = () => {
         whileInView={{ opacity: 1, x: 0 }}
         initial={{ opacity: 0, x: -100 }}
         transition={{ duration: 1.5 }}
-        className="flex flex-wrap items-center justify-center gap-4"
+        className="flex items-center justify-center gap-4 flex-nowrap" // Prevent wrapping
       >
         {/* Дизайнерські інструменти */}
         <motion.div
           variants={iconVariants(2)}
           initial="initial"
           animate="animate"
-          className="p-4"
+          className="flex justify-center items-center p-4"
           title="Figma"
         >
           <FaFigma className="text-7xl text-red-700" />
@@ -47,7 +47,7 @@ const Technologies = () => {
           variants={iconVariants(4)}
           initial="initial"
           animate="animate"
-          className="p-4"
+          className="flex justify-center items-center p-4"
           title="Adobe XD"
         >
           <SiAdobe className="text-7xl text-purple-500" />
@@ -56,7 +56,7 @@ const Technologies = () => {
           variants={iconVariants(4)}
           initial="initial"
           animate="animate"
-          className="p-4"
+          className="flex justify-center items-center p-4"
           title="Sketch"
         >
           <FaSketch className="text-7xl text-yellow-500" />
@@ -65,7 +65,7 @@ const Technologies = () => {
           variants={iconVariants(3)}
           initial="initial"
           animate="animate"
-          className="p-4"
+          className="flex justify-center items-center p-4"
           title="Photoshop"
         >
           <SiAdobephotoshop className="text-7xl text-blue-500" />
@@ -76,7 +76,7 @@ const Technologies = () => {
           variants={iconVariants(2.5)}
           initial="initial"
           animate="animate"
-          className="p-4"
+          className="flex justify-center items-center p-4"
           title="React"
         >
           <RiReactjsLine className="text-7xl text-cyan-400" />
@@ -85,7 +85,7 @@ const Technologies = () => {
           variants={iconVariants(6)}
           initial="initial"
           animate="animate"
-          className="p-4"
+          className="flex justify-center items-center p-4"
           title="Node.js"
         >
           <FaNodeJs className="text-7xl text-green-500" />
@@ -94,7 +94,7 @@ const Technologies = () => {
           variants={iconVariants(5)}
           initial="initial"
           animate="animate"
-          className="p-4"
+          className="flex justify-center items-center p-4"
           title="MongoDB"
         >
           <SiMongodb className="text-7xl text-green-500" />
@@ -103,25 +103,40 @@ const Technologies = () => {
           variants={iconVariants(5)}
           initial="initial"
           animate="animate"
-          className="p-4"
+          className="flex justify-center items-center p-4"
           title="Express.js"
         >
           <SiExpress className="text-7xl text-gray-500" />
         </motion.div>
+        
+        {/* JavaScript icon - Positioned before HTML5 */}
+        <motion.div
+          variants={iconVariants(4)} // Match the speed with other icons
+          initial="initial"
+          animate="animate"
+          className="flex justify-center items-center p-4"
+          title="JavaScript"
+        >
+          <SiJavascript className="text-7xl text-yellow-500" />
+        </motion.div>
+
+        {/* HTML5 icon */}
         <motion.div
           variants={iconVariants(4)}
           initial="initial"
           animate="animate"
-          className="p-4"
+          className="flex justify-center items-center p-4"
           title="HTML5"
         >
           <SiHtml5 className="text-7xl text-orange-500" />
         </motion.div>
+
+        {/* CSS3 icon */}
         <motion.div
           variants={iconVariants(4)}
           initial="initial"
           animate="animate"
-          className="p-4"
+          className="flex justify-center items-center p-4"
           title="CSS3"
         >
           <SiCss3 className="text-7xl text-blue-500" />
@@ -132,6 +147,9 @@ const Technologies = () => {
 };
 
 export default Technologies;
+
+
+
 
 
 
