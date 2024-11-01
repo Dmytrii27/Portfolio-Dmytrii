@@ -1,9 +1,19 @@
 import { PROJECTS } from "../constants";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/1.1.png";
 
 const Projects = () => {
+  const navigate = useNavigate();
+
+  // Функція для збереження позиції скролу та переходу на сторінку проєкту
+  const handleProjectClick = (projectPath) => {
+    // Збереження позиції скролу в sessionStorage
+    sessionStorage.setItem("scrollPosition", window.scrollY);
+    navigate(projectPath);
+  };
+
   return (
     <div className="pb-4">
       <motion.h2
@@ -16,11 +26,8 @@ const Projects = () => {
       </motion.h2>
       <div>
         {PROJECTS.map((project, index) => (
-          <div
-            key={index}
-            className="mb-8 flex flex-wrap lg:justify-center relative group"
-          >
-            <ProjectItem project={project} />
+          <div key={index} className="mb-8 flex flex-wrap lg:justify-center relative group">
+            <ProjectItem project={project} index={index} onClick={handleProjectClick} />
           </div>
         ))}
       </div>
@@ -28,8 +35,8 @@ const Projects = () => {
   );
 };
 
-const ProjectItem = ({ project }) => {
-  const [isHovered, setIsHovered] = useState(false); // Локальний стан для кожного зображення
+const ProjectItem = ({ project, index, onClick }) => {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <>
@@ -39,23 +46,41 @@ const ProjectItem = ({ project }) => {
         transition={{ duration: 1 }}
         className="w-full lg:w-1/4 relative overflow-hidden"
       >
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="relative block group-hover:cursor-pointer"
-          onMouseEnter={() => setIsHovered(true)} // Локальний стан для наведення
-          onMouseLeave={() => setIsHovered(false)} // Локальний стан для виходу
-        >
-          <img
-            src={project.image}
-            width={250}
-            height={250}
-            alt={project.title}
-            className="rounded object-cover w-full h-full" // Без рамок
-          />
-          <ImageOverlay isHovered={isHovered} />
-        </a>
+        {index <= 2 ? (
+          <div
+            className="relative block group-hover:cursor-pointer"
+            onClick={() => onClick(`/project${index + 1}`)} // Виклик handleProjectClick з шляхом
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <img
+              src={project.image}
+              width={250}
+              height={250}
+              alt={project.title}
+              className="rounded object-cover w-full h-full"
+            />
+            <ImageOverlay isHovered={isHovered} />
+          </div>
+        ) : (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative block group-hover:cursor-pointer"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <img
+              src={project.image}
+              width={250}
+              height={250}
+              alt={project.title}
+              className="rounded object-cover w-full h-full"
+            />
+            <ImageOverlay isHovered={isHovered} />
+          </a>
+        )}
       </motion.div>
 
       <motion.div
@@ -82,44 +107,15 @@ const ProjectItem = ({ project }) => {
 const ImageOverlay = ({ isHovered }) => {
   return (
     <motion.div
-      initial={{ y: 0 }} // Початково перекриває зображення
-      animate={{ y: isHovered ? "100%" : "0%" }} // Плавно відкривається і закривається
+      initial={{ y: 0 }}
+      animate={{ y: isHovered ? "100%" : "0%" }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
       className="absolute inset-0 bg-black bg-opacity-90 flex items-center justify-center"
     >
-      {/* Логотип посередині полотна */}
-      <img
-        src={logo} // Вказує на відносний шлях з поточної директорії
-        alt="Logo"
-        className="h-20 w-20 object-contain"
-      />
+      <img src={logo} alt="Logo" className="h-20 w-20 object-contain" />
     </motion.div>
   );
 };
 
 export default Projects;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -1,6 +1,6 @@
 import project1 from "../assets/projects/project-1.webp";
 import project2 from "../assets/projects/project-2.webp";
-import project3 from "../assets/projects/project-3.webp";
+import project3 from "../assets/projects/Hero page 3.png";
 import jobfii from "../assets/projects/jobfii.png";
 
 export const HERO_CONTENT = `I am a passionate UX/UI designer with a strong interest in creating intuitive and visually appealing user interfaces. Although I don't have formal experience, I have been actively learning design principles and tools like Figma, Sketch, and Adobe XD. I am constantly working on enhancing my understanding of user behavior and interaction to craft designs that are both functional and aesthetically pleasing.`;
