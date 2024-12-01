@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import FrameImage from '../assets/Group 427326644.png'; // Adjust the path to the image as needed
+import FrameImage from '../assets/Frame 427326610.png'; // Adjust the path to the image as needed
+import ProjectOverviewImage from '../assets/Project overview 2.png'; // Path to the second image
+import DesignProcessImage from '../assets/Design process and timeline 3.png'; // Path to the new image
 
 const BlankProjectPage = () => {
   const navigate = useNavigate();
   const [showGoUpButton, setShowGoUpButton] = useState(false);
+  const [showSecondImage, setShowSecondImage] = useState(false); // State for second image animation
+  const [showThirdImage, setShowThirdImage] = useState(false); // State for third image animation
 
   const handleBackClick = () => {
     const scrollPosition = sessionStorage.getItem("scrollPosition");
@@ -34,6 +38,20 @@ const BlankProjectPage = () => {
       } else {
         setShowGoUpButton(false);
       }
+
+      // Show the second image based on scroll position
+      if (window.scrollY > 0) {
+        setShowSecondImage(true);
+      } else {
+        setShowSecondImage(false);
+      }
+
+      // Show the third image only after scrolling past the second image
+      if (window.scrollY > 900) { // Adjust this value to control when the third image appears (after the second image)
+        setShowThirdImage(true);
+      } else {
+        setShowThirdImage(false);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -54,18 +72,47 @@ const BlankProjectPage = () => {
         ease: "easeInOut"
       }}
     >
-      <div
-        className="project-viewer"
-        style={{ marginTop: '-20px' }} // Directly set top margin
-      >
+      <div className="project-viewer" style={{ marginTop: '-20px' }}>
         <img
           src={FrameImage}
           alt="Project Detail"
           style={{
-            width: '85%',       // Set width to 90% of the container
-            maxWidth: '1500px', // Optional: Limit max width for larger screens
+            width: '85%',
+            maxWidth: '1500px',
             display: 'block',
             margin: '0 auto',
+          }}
+        />
+
+        {/* First image with animation */}
+        <motion.img
+          src={ProjectOverviewImage}
+          alt="Project Overview"
+          initial={{ opacity: 0, x: -150 }} // Move it further off-screen to the left
+          animate={showSecondImage ? { opacity: 1, x: 0 } : { opacity: 0, x: -150 }} // Animate to visible
+          transition={{ duration: 1.2, ease: [0.6, 0.05, 0.2, 0.9] }} // Increased duration for a slower effect
+          style={{
+            width: '85%',
+            maxWidth: '1500px',
+            display: 'block',
+            margin: '0 auto',
+            marginTop: '0',
+          }}
+        />
+
+        {/* Second image with animation from the right */}
+        <motion.img
+          src={DesignProcessImage}
+          alt="Design Process"
+          initial={{ opacity: 0, x: 150 }} // Move it off-screen to the right
+          animate={showThirdImage ? { opacity: 1, x: 0 } : { opacity: 0, x: 150 }} // Animate to visible
+          transition={{ duration: 1.2, ease: [0.6, 0.05, 0.2, 0.9] }} // Same animation settings
+          style={{
+            width: '85%',
+            maxWidth: '1500px',
+            display: 'block',
+            margin: '0 auto',
+            marginTop: '0',
           }}
         />
       </div>
@@ -110,6 +157,16 @@ const BlankProjectPage = () => {
 };
 
 export default BlankProjectPage;
+
+
+
+
+
+
+
+
+
+
 
 
 

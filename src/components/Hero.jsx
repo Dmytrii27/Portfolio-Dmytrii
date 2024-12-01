@@ -1,5 +1,5 @@
 import { HERO_CONTENT } from "../constants";
-import profilePic from "../assets/photoo.jpg";
+import profilePic from "../assets/photoo2.jpg";
 import { motion } from "framer-motion";
 
 const containerVariants = {
@@ -23,20 +23,21 @@ const Hero = () => {
   return (
     <div className="pb-4 lg:mb-36">
       <div className="flex flex-wrap lg:flex-row-reverse">
+        {/* Зображення */}
         <div className="w-full lg:w-1/2">
           <div className="flex justify-center lg:p-8">
             <motion.img
               initial={{ x: 100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 1.5 }}
-              width={450}
-              height={350}
               src={profilePic}
               alt="Dmytrii Satsiuk"
-              className="border border-stone-900 rounded-3xl"
+              className="max-h-[500px] w-auto border border-stone-900 rounded-3xl scale-x-[1.1] transform -translate-x-4 -translate-y-2"
             />
           </div>
         </div>
+
+        {/* Текстовий контент */}
         <div className="w-full lg:w-1/2">
           <motion.div
             className="flex flex-col items-center lg:items-start mt-10"
@@ -80,3 +81,6 @@ const Hero = () => {
 };
 
 export default Hero;
+
+
+
